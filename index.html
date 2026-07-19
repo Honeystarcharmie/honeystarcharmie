@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,18 +12,42 @@
 
 <body>
 
+    <!-- ANNOUNCEMENT BAR -->
+
+    <div class="announcement-bar">
+        ✨ Welcome to HoneyStarCharmie! ✨
+    </div>
+
+
     <!-- HEADER -->
 
-    <header>
-        <div class="logo">
-            HoneyStarCharmie ✦
+    <header class="main-header">
+
+        <button class="menu-button" aria-label="Open menu">
+            ☰
+        </button>
+
+        <a href="#home" class="logo">
+            HoneyStarCharmie
+        </a>
+
+        <div class="header-icons">
+
+            <button class="icon-button" aria-label="Search">
+                🔍
+            </button>
+
+            <button class="icon-button" aria-label="Account">
+                ♡
+            </button>
+
+            <button class="cart-button" aria-label="Shopping cart">
+                🛍️
+                <span class="cart-count">0</span>
+            </button>
+
         </div>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#shop">Shop</a>
-            <a href="#about">About</a>
-        </nav>
     </header>
 
 
@@ -30,46 +55,68 @@
 
     <section id="home" class="hero">
 
-        <div class="hero-text">
+        <div class="hero-overlay"></div>
 
-            <p class="eyebrow">
-                tiny handmade treasures ✦
+        <div class="hero-content">
+
+            <p class="hero-small-text">
+                ✨ Handmade with love! ✨
             </p>
 
             <h1>
-                Little things,<br>
-                made with magic.
+                HoneyStarCharmie
             </h1>
 
-            <p class="hero-description">
-                Handmade clay charms, desk buddies and worry stones
-                created to bring a little joy to your everyday life.
-            </p>
-
-            <a href="#shop" class="shop-button">
-                Explore the collection →
+            <a href="#shop" class="shop-now-button">
+                Shop Now 🛍️
             </a>
 
-        </div>
-
-        <div class="hero-decoration">
-            ✦
         </div>
 
     </section>
 
 
-    <!-- SHOP SECTION -->
+    <!-- FEATURED SECTION -->
 
-    <section id="shop" class="shop">
+    <section id="shop" class="shop-section">
 
-        <p class="eyebrow">
-            handmade with care
-        </p>
+        <div class="section-heading">
 
-        <h2>
-            Little creations
-        </h2>
+            <h2>
+                Featured
+            </h2>
+
+            <p>
+                Our cutest picks, just for you 💕
+            </p>
+
+        </div>
+
+
+        <!-- CATEGORY TABS -->
+
+        <div class="category-tabs">
+
+            <button class="category-tab active">
+                Featured
+            </button>
+
+            <button class="category-tab">
+                Keychains
+            </button>
+
+            <button class="category-tab">
+                Desk Buddies
+            </button>
+
+            <button class="category-tab">
+                Worry Stones
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
 
         <div class="products">
 
@@ -78,27 +125,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                     <img src="cookie.jpg.jpeg" alt="Cooky keychain">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="cookie.jpg.jpeg"
+                        alt="Cookie Keychain"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Cookie Keychain
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Keychain
-                </p>
+                    <h3>
+                        Cookie Keychain
+                    </h3>
 
-                <p class="price">
-                    ₹149
-                </p>
+                    <p class="product-type">
+                        Keychain
+                    </p>
 
-                <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20Cookie%20Keychain"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹149
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Cookie Keychain"
+                        data-price="149"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -107,27 +174,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                     <img src="frog.jpg.jpeg" alt="Frog DeskBuddy">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="frog.jpg.jpeg"
+                        alt="Frog Desk Buddy"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Frog Desk Buddy
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Desk Buddy
-                </p>
+                    <h3>
+                        Frog Desk Buddy
+                    </h3>
 
-                <p class="price">
-                    ₹229
-                </p>
+                    <p class="product-type">
+                        Desk Buddy
+                    </p>
 
-                <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20frog%20Deskbuddy"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹229
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Frog Desk Buddy"
+                        data-price="229"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -136,27 +223,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                    <img src="mouse.jpg.jpeg" alt="Mouse DeskBuddy">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="mouse.jpg.jpeg"
+                        alt="Baking Mouse Desk Buddy"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Baking Mouse Desk Buddy
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Desk Buddy
-                </p>
+                    <h3>
+                        Baking Mouse Desk Buddy
+                    </h3>
 
-                <p class="price">
-                    ₹229
-                </p>
+                    <p class="product-type">
+                        Desk Buddy
+                    </p>
 
-               <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20mouse%20deskbuddy"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹229
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Baking Mouse Desk Buddy"
+                        data-price="229"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -165,27 +272,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                     <img src="teddy.jpg.jpeg" alt="Teddy worrystone">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        Sale
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="teddy.jpg.jpeg"
+                        alt="Teddy Worry Stone"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Teddy Worry Stone
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Worry Stone
-                </p>
+                    <h3>
+                        Teddy Worry Stone
+                    </h3>
 
-                <p class="price">
-                    ₹119
-                </p>
+                    <p class="product-type">
+                        Worry Stone
+                    </p>
 
-                <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20teddy%20worrystone"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹119
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Teddy Worry Stone"
+                        data-price="119"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -194,27 +321,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                     <img src="cat.jpg.jpeg" alt="Cat worrystone">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="cat.jpg.jpeg"
+                        alt="Cat with a Bee Worry Stone"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Cat with a Bee Worry Stone
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Worry Stone
-                </p>
+                    <h3>
+                        Cat with a Bee Worry Stone
+                    </h3>
 
-                <p class="price">
-                    ₹129
-                </p>
+                    <p class="product-type">
+                        Worry Stone
+                    </p>
 
-                <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20cat%20worrystone"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹129
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Cat with a Bee Worry Stone"
+                        data-price="129"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -223,27 +370,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                    <img src="mushroom.jpg.jpeg" alt="Mushroom Keychain">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="mushroom.jpg.jpeg"
+                        alt="Mushroom Keychain"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Mushroom Keychain
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Keychain
-                </p>
+                    <h3>
+                        Mushroom Keychain
+                    </h3>
 
-                <p class="price">
-                    ₹149
-                </p>
+                    <p class="product-type">
+                        Keychain
+                    </p>
 
-                <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20mushroom%20Keychain"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹149
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Mushroom Keychain"
+                        data-price="149"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -252,27 +419,47 @@
 
             <div class="product-card">
 
-                <div class="product-image">
-                      <img src="berry.jpg(2).jpeg" alt="BerryTart Keychain">
+                <div class="product-image-container">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <button class="wishlist-button">
+                        ♡
+                    </button>
+
+                    <img
+                        src="berry.jpg(2).jpeg"
+                        alt="Berry Tart Keychain"
+                        class="product-image"
+                    >
+
                 </div>
 
-                <h3>
-                    Berry Tart Keychain
-                </h3>
+                <div class="product-details">
 
-                <p class="product-type">
-                    Keychain
-                </p>
+                    <h3>
+                        Berry Tart Keychain
+                    </h3>
 
-                <p class="price">
-                    ₹149
-                </p>
+                    <p class="product-type">
+                        Keychain
+                    </p>
 
-                <a class="order-button"
-   href="https://wa.me/918797029398?text=Hi%20I%20want%20to%20order%20the%20berrytart%20Keychain"
-   target="_blank">
-   Order now
-</a>
+                    <p class="price">
+                        ₹149
+                    </p>
+
+                    <button
+                        class="add-to-cart-button"
+                        data-name="Berry Tart Keychain"
+                        data-price="149"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -281,50 +468,22 @@
     </section>
 
 
-    <!-- COMING SOON SECTION -->
-
-    <section class="coming-soon">
-
-        <p class="eyebrow">
-            something new is growing ✦
-        </p>
-
-        <h2>
-            New creations coming soon...
-        </h2>
-
-        <p>
-            More tiny handmade friends are currently being made
-            in the HoneyStarCharmie studio.
-        </p>
-
-        <div class="coming-soon-items">
-
-            <span>✦</span>
-            <span>✿</span>
-            <span>♡</span>
-            <span>☼</span>
-
-        </div>
-
-    </section>
-
-
     <!-- ABOUT SECTION -->
 
-    <section id="about" class="about">
+    <section id="about" class="about-section">
 
         <p class="eyebrow">
-            about HoneyStarCharmie
+            about HoneyStarCharmie ✦
         </p>
 
         <h2>
-            Made for little moments of happiness.
+            Tiny handmade things,
+            made to bring joy.
         </h2>
 
         <p>
-            HoneyStarCharmie is a small handmade shop filled with
-            tiny clay creations, made slowly and carefully by hand.
+            Every HoneyStarCharmie creation is handmade slowly and carefully,
+            so you can have a little piece of handmade happiness with you.
         </p>
 
     </section>
@@ -334,16 +493,21 @@
 
     <footer>
 
-        <p>
+        <h3>
             HoneyStarCharmie ✦
-        </p>
+        </h3>
 
         <p>
-            handmade with care
+            Handmade with love 💕
         </p>
 
     </footer>
 
 
+    <!-- JAVASCRIPT FILE -->
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
