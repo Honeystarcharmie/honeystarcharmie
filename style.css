@@ -540,6 +540,10 @@ footer p {
     }
 
 }
+/* =========================
+   BUY NOW BUTTON
+========================= */
+
 .buy-now-button {
     width: 100%;
     padding: 17px;
@@ -550,10 +554,25 @@ footer p {
     color: #eb6598;
     font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
     transition: 0.3s;
 }
 
 .buy-now-button:hover {
     background: #eb6598;
     color: white;
+}
+
+
+/* =========================
+   MOBILE BUY NOW BUTTON
+========================= */
+
+@media (max-width: 700px) {
+
+    .buy-now-button {
+        padding: 12px 5px;
+        font-size: 14px;
+    }
+
 }
