@@ -146,7 +146,7 @@ buyNowButtons.forEach(button => {
                 <p>Scan the QR code below to pay using PhonePe or any UPI app.</p>
 
                 <img
-                    src="payment-qr.jpg.jpeg"
+                    src="payment-qr.jpg"
                     alt="Payment QR Code"
                     style="
                         width: 280px;
