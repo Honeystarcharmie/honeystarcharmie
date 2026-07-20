@@ -600,6 +600,23 @@
 <!-- ORDER FORM -->
 
 <div id="order-form-container" class="order-form-container">
+    <div id="payment-section" class="payment-section">
+
+    <h3>Complete Your Payment 💳</h3>
+
+    <p id="payment-amount"></p>
+
+    <img
+        id="payment-qr"
+        src="payment-qr.jpg"
+        alt="Payment QR Code"
+    >
+
+    <p>
+        Scan this QR code using any UPI app to pay.
+    </p>
+
+</div>
 
     <div class="order-form-box">
 
@@ -667,6 +684,44 @@
             </button>
 
         </form>
+
+    </div>
+
+</div>
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <strong>${item.name}</strong>
+
+                <p>
+                    ₹${item.price} × ${item.quantity}
+                    = ₹${itemTotal}
+                </p>
+
+                <button onclick="removeFromCart(${index})">
+                    Remove
+                </button>
+
+            </div>
+        `;
+<div id="cart-modal" class="cart-modal">
+
+    <div class="cart-box">
+
+        <button id="close-cart" class="close-cart">
+            ×
+        </button>
+
+        <h2>Your Cart 🛍️</h2>
+
+        <div id="cart-items"></div>
+
+        <h3 id="cart-total"></h3>
+
+        <button id="cart-checkout-button">
+            Checkout
+        </button>
 
     </div>
 

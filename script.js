@@ -62,41 +62,88 @@ function updateCartCount() {
 
 // CART BUTTON
 
+// =========================
+// CART POPUP
+// =========================
+
 const cartButton = document.querySelector(".cart-button");
+const cartModal = document.querySelector("#cart-modal");
+const closeCart = document.querySelector("#close-cart");
+const cartItems = document.querySelector("#cart-items");
+const cartTotal = document.querySelector("#cart-total");
 
 cartButton.addEventListener("click", function () {
 
+    renderCart();
+
+    cartModal.classList.add("active");
+
+});
+
+
+function renderCart() {
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
     if (cart.length === 0) {
 
-        alert("Your cart is empty! 🛍️");
+        cartItems.innerHTML =
+            "<p>Your cart is empty! 🛍️</p>";
+
+        cartTotal.textContent = "";
 
         return;
 
     }
 
-    let cartMessage = "Your Cart:\n\n";
+    cart.forEach((item, index) => {
 
-    let total = 0;
-
-    cart.forEach(item => {
-
-        const itemTotal = item.price * item.quantity;
+        const itemTotal =
+            item.price * item.quantity;
 
         total += itemTotal;
 
-        cartMessage +=
-            item.name +
-            " x " +
-            item.quantity +
-            " = ₹" +
-            itemTotal +
-            "\n";
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <strong>${item.name}</strong>
+
+                <p>
+                    ₹${item.price} × ${item.quantity}
+                    = ₹${itemTotal}
+                </p>
+
+                <button onclick="removeFromCart(${index})">
+                    Remove
+                </button>
+
+            </div>
+        `;
 
     });
 
-    cartMessage += "\nTotal: ₹" + total;
+    cartTotal.textContent =
+        "Total: ₹" + total;
 
-    alert(cartMessage);
+}
+
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+closeCart.addEventListener("click", function () {
+
+    cartModal.classList.remove("active");
 
 });
 
@@ -222,27 +269,16 @@ orderForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
-    const customerName =
-        document.querySelector("#customer-name").value;
-
-    const customerPhone =
-        document.querySelector("#customer-phone").value;
-
-    const customerAddress =
-        document.querySelector("#customer-address").value;
-
     const quantity =
         document.querySelector("#customer-quantity").value;
 
     const total =
         selectedProductPrice * quantity;
 
-    alert(
-        "Order details saved! 🛍️\n\n" +
-        "Product: " + selectedProductName +
-        "\nQuantity: " + quantity +
-        "\nTotal: ₹" + total +
-        "\n\nNow you can show the payment QR code."
-    );
+    document.querySelector("#payment-amount").textContent =
+        "Please pay ₹" + total;
+
+    document.querySelector("#payment-section")
+        .classList.add("active");
 
 });
