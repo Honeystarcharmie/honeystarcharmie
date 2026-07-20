@@ -597,7 +597,80 @@
         </p>
 
     </footer>
+<!-- ORDER FORM -->
 
+<div id="order-form-container" class="order-form-container">
+
+    <div class="order-form-box">
+
+        <button id="close-order-form" class="close-order-form">
+            ×
+        </button>
+
+        <h2>Place Your Order 🛍️</h2>
+
+        <p id="selected-product"></p>
+
+        <form id="order-form">
+
+            <label for="customer-name">
+                Your Name
+            </label>
+
+            <input
+                type="text"
+                id="customer-name"
+                name="customer-name"
+                required
+            >
+
+            <label for="customer-phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="customer-phone"
+                name="customer-phone"
+                required
+            >
+
+            <label for="customer-address">
+                Full Delivery Address
+            </label>
+
+            <textarea
+                id="customer-address"
+                name="customer-address"
+                rows="4"
+                required
+            ></textarea>
+
+            <label for="customer-quantity">
+                Quantity
+            </label>
+
+            <input
+                type="number"
+                id="customer-quantity"
+                name="customer-quantity"
+                min="1"
+                value="1"
+                required
+            >
+
+            <button
+                type="submit"
+                class="submit-order-button"
+            >
+                Continue to Payment 💳
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
     <!-- JAVASCRIPT FILE -->
 

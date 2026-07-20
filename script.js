@@ -146,7 +146,7 @@ buyNowButtons.forEach(button => {
                 <p>Scan the QR code below to pay using PhonePe or any UPI app.</p>
 
                 <img
-                    src="payment-qr.jpg"
+                    src="payment-qr.jpg.jpeg"
                     alt="Payment QR Code"
                     style="
                         width: 280px;
@@ -164,5 +164,85 @@ buyNowButtons.forEach(button => {
         paymentWindow.document.close();
 
     });
+
+});
+// =========================
+// ORDER FORM
+// =========================
+
+const orderFormContainer =
+    document.querySelector("#order-form-container");
+
+const orderForm =
+    document.querySelector("#order-form");
+
+const selectedProduct =
+    document.querySelector("#selected-product");
+
+const closeOrderForm =
+    document.querySelector("#close-order-form");
+
+let selectedProductName = "";
+let selectedProductPrice = 0;
+
+
+// BUY NOW BUTTONS
+
+document.querySelectorAll(".buy-now-button").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        selectedProductName = this.dataset.name;
+        selectedProductPrice = Number(this.dataset.price);
+
+        selectedProduct.textContent =
+            selectedProductName +
+            " — ₹" +
+            selectedProductPrice;
+
+        orderFormContainer.classList.add("active");
+
+    });
+
+});
+
+
+// CLOSE FORM
+
+closeOrderForm.addEventListener("click", function () {
+
+    orderFormContainer.classList.remove("active");
+
+});
+
+
+// SUBMIT FORM
+
+orderForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    const customerName =
+        document.querySelector("#customer-name").value;
+
+    const customerPhone =
+        document.querySelector("#customer-phone").value;
+
+    const customerAddress =
+        document.querySelector("#customer-address").value;
+
+    const quantity =
+        document.querySelector("#customer-quantity").value;
+
+    const total =
+        selectedProductPrice * quantity;
+
+    alert(
+        "Order details saved! 🛍️\n\n" +
+        "Product: " + selectedProductName +
+        "\nQuantity: " + quantity +
+        "\nTotal: ₹" + total +
+        "\n\nNow you can show the payment QR code."
+    );
 
 });
