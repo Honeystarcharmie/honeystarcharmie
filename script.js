@@ -5,9 +5,12 @@
 let cart = [];
 
 
-// ADD TO CART BUTTONS
+// =========================
+// ADD TO CART
+// =========================
 
-const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+const addToCartButtons =
+    document.querySelectorAll(".add-to-cart-button");
 
 addToCartButtons.forEach(button => {
 
@@ -21,17 +24,13 @@ addToCartButtons.forEach(button => {
         );
 
         if (existingProduct) {
-
             existingProduct.quantity++;
-
         } else {
-
             cart.push({
                 name: productName,
                 price: productPrice,
                 quantity: 1
             });
-
         }
 
         updateCartCount();
@@ -43,11 +42,14 @@ addToCartButtons.forEach(button => {
 });
 
 
-// UPDATE CART NUMBER
+// =========================
+// UPDATE CART COUNT
+// =========================
 
 function updateCartCount() {
 
-    const cartCount = document.querySelector(".cart-count");
+    const cartCount =
+        document.querySelector(".cart-count");
 
     let totalItems = 0;
 
@@ -60,17 +62,28 @@ function updateCartCount() {
 }
 
 
-// CART BUTTON
-
 // =========================
 // CART POPUP
 // =========================
 
-const cartButton = document.querySelector(".cart-button");
-const cartModal = document.querySelector("#cart-modal");
-const closeCart = document.querySelector("#close-cart");
-const cartItems = document.querySelector("#cart-items");
-const cartTotal = document.querySelector("#cart-total");
+const cartButton =
+    document.querySelector(".cart-button");
+
+const cartModal =
+    document.querySelector("#cart-modal");
+
+const closeCart =
+    document.querySelector("#close-cart");
+
+const cartItems =
+    document.querySelector("#cart-items");
+
+const cartTotal =
+    document.querySelector("#cart-total");
+
+const cartCheckoutButton =
+    document.querySelector("#cart-checkout-button");
+
 
 cartButton.addEventListener("click", function () {
 
@@ -95,8 +108,8 @@ function renderCart() {
         cartTotal.textContent = "";
 
         return;
-
     }
+
 
     cart.forEach((item, index) => {
 
@@ -106,6 +119,7 @@ function renderCart() {
         total += itemTotal;
 
         cartItems.innerHTML += `
+
             <div class="cart-item">
 
                 <strong>${item.name}</strong>
@@ -120,9 +134,11 @@ function renderCart() {
                 </button>
 
             </div>
+
         `;
 
     });
+
 
     cartTotal.textContent =
         "Total: ₹" + total;
@@ -149,70 +165,101 @@ closeCart.addEventListener("click", function () {
 
 
 // =========================
-// BUY NOW - QR PAYMENT
+// CHECKOUT FROM CART
 // =========================
 
+cartCheckoutButton.addEventListener("click", function () {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty! 🛍️");
+
+        return;
+
+    }
+
+
+    // Close cart popup
+
+    cartModal.classList.remove("active");
+
+
+    // Calculate total
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += item.price * item.quantity;
+
+    });
+
+
+    // Create a combined product name
+
+    const productNames = cart
+        .map(item => `${item.name} × ${item.quantity}`)
+        .join(", ");
+
+
+    // Put cart details into order form
+
+    selectedProductName = productNames;
+
+    selectedProductPrice = total;
+
+
+    selectedProduct.textContent =
+        productNames + " — Total: ₹" + total;
+
+
+    // Reset quantity to 1 because cart quantities
+    // are already included in the total
+
+    document.querySelector("#customer-quantity").value = 1;
+
+
+    // Open order form
+
+    orderFormContainer.classList.add("active");
+
+});
+
+
 // =========================
-// BUY NOW - QR PAYMENT
+// BUY NOW
 // =========================
 
-const buyNowButtons = document.querySelectorAll(".buy-now-button");
+const buyNowButtons =
+    document.querySelectorAll(".buy-now-button");
 
 buyNowButtons.forEach(button => {
 
     button.addEventListener("click", function () {
 
-        const productName = this.dataset.name;
-        const productPrice = this.dataset.price;
+        selectedProductName =
+            this.dataset.name;
 
-        const paymentWindow = window.open("", "_blank");
+        selectedProductPrice =
+            Number(this.dataset.price);
 
-        if (!paymentWindow) {
-            alert("Please allow pop-ups for this website to open the payment QR code.");
-            return;
-        }
 
-        paymentWindow.document.write(`
-            <html>
-            <head>
-                <title>Pay for ${productName}</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            </head>
+        selectedProduct.textContent =
+            selectedProductName +
+            " — ₹" +
+            selectedProductPrice;
 
-            <body style="
-                font-family: Arial, sans-serif;
-                text-align: center;
-                padding: 25px;
-                background: #fffdf9;
-            ">
 
-                <h2>${productName}</h2>
+        document.querySelector("#customer-quantity").value = 1;
 
-                <h3>Amount: ₹${productPrice}</h3>
 
-                <p>Scan the QR code below to pay using PhonePe or any UPI app.</p>
-
-                <img
-                    src="payment-qr.jpg"
-                    alt="Payment QR Code"
-                    style="
-                        width: 280px;
-                        max-width: 90%;
-                        border-radius: 12px;
-                    "
-                >
-
-                <p>After payment, please keep your payment confirmation.</p>
-
-            </body>
-            </html>
-        `);
-
-        paymentWindow.document.close();
+        orderFormContainer.classList.add("active");
 
     });
 
 });
+
+
 // =========================
 // ORDER FORM
 // =========================
@@ -229,32 +276,21 @@ const selectedProduct =
 const closeOrderForm =
     document.querySelector("#close-order-form");
 
+const paymentSection =
+    document.querySelector("#payment-section");
+
+const paymentAmount =
+    document.querySelector("#payment-amount");
+
+
 let selectedProductName = "";
+
 let selectedProductPrice = 0;
 
 
-// BUY NOW BUTTONS
-
-document.querySelectorAll(".buy-now-button").forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        selectedProductName = this.dataset.name;
-        selectedProductPrice = Number(this.dataset.price);
-
-        selectedProduct.textContent =
-            selectedProductName +
-            " — ₹" +
-            selectedProductPrice;
-
-        orderFormContainer.classList.add("active");
-
-    });
-
-});
-
-
-// CLOSE FORM
+// =========================
+// CLOSE ORDER FORM
+// =========================
 
 closeOrderForm.addEventListener("click", function () {
 
@@ -263,22 +299,29 @@ closeOrderForm.addEventListener("click", function () {
 });
 
 
-// SUBMIT FORM
+// =========================
+// SUBMIT ORDER FORM
+// =========================
 
 orderForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
+
     const quantity =
-        document.querySelector("#customer-quantity").value;
+        Number(
+            document.querySelector("#customer-quantity").value
+        );
+
 
     const total =
         selectedProductPrice * quantity;
 
-    document.querySelector("#payment-amount").textContent =
+
+    paymentAmount.textContent =
         "Please pay ₹" + total;
 
-    document.querySelector("#payment-section")
-        .classList.add("active");
+
+    paymentSection.classList.add("active");
 
 });
