@@ -4,84 +4,115 @@ let selectedProductName = "";
 let selectedProductPrice = 0;
 let isCartCheckout = false;
 
+
 // =========================
 // ELEMENTS
 // =========================
 
-const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
-const buyNowButtons = document.querySelectorAll(".buy-now-button");
+const addToCartButtons =
+    document.querySelectorAll(".add-to-cart-button");
 
-const cartButton = document.querySelector(".cart-button");
-const cartModal = document.querySelector("#cart-modal");
-const closeCart = document.querySelector("#close-cart");
-const cartItems = document.querySelector("#cart-items");
-const cartTotal = document.querySelector("#cart-total");
-const cartCheckoutButton = document.querySelector("#cart-checkout-button");
+const buyNowButtons =
+    document.querySelectorAll(".buy-now-button");
 
-const orderFormContainer = document.querySelector("#order-form-container");
-const orderForm = document.querySelector("#order-form");
-const selectedProduct = document.querySelector("#selected-product");
-const closeOrderForm = document.querySelector("#close-order-form");
+const cartButton =
+    document.querySelector(".cart-button");
 
-const paymentSection = document.querySelector("#payment-section");
-const paymentAmount = document.querySelector("#payment-amount");
+const cartModal =
+    document.querySelector("#cart-modal");
 
-const quantityInput = document.querySelector("#customer-quantity");
+const closeCart =
+    document.querySelector("#close-cart");
+
+const cartItems =
+    document.querySelector("#cart-items");
+
+const cartTotal =
+    document.querySelector("#cart-total");
+
+const cartCheckoutButton =
+    document.querySelector("#cart-checkout-button");
+
+const orderFormContainer =
+    document.querySelector("#order-form-container");
+
+const orderForm =
+    document.querySelector("#order-form");
+
+const selectedProduct =
+    document.querySelector("#selected-product");
+
+const closeOrderForm =
+    document.querySelector("#close-order-form");
+
+const paymentSection =
+    document.querySelector("#payment-section");
+
+const paymentAmount =
+    document.querySelector("#payment-amount");
+
 
 // =========================
 // SHIPPING FUNCTION
 // =========================
 
-function getShipping(subtotal) {
+function calculateShipping(subtotal) {
 
-```
-if (subtotal < 400) {
-    return 50;
+    if (subtotal < 400) {
+        return 50;
+    }
+
+    return 0;
 }
 
-return 0;
-```
-
-}
 
 // =========================
 // ADD TO CART
 // =========================
 
-addToCartButtons.forEach(function (button) {
+addToCartButtons.forEach(button => {
 
-```
-button.addEventListener("click", function () {
+    button.addEventListener("click", function () {
 
-    const productName = this.dataset.name;
-    const productPrice = Number(this.dataset.price);
+        const productName = this.dataset.name;
 
-    const existingProduct = cart.find(function (item) {
-        return item.name === productName;
+        const productPrice =
+            Number(this.dataset.price);
+
+        const existingProduct =
+            cart.find(item =>
+                item.name === productName
+            );
+
+        if (existingProduct) {
+
+            existingProduct.quantity++;
+
+        } else {
+
+            cart.push({
+
+                name: productName,
+
+                price: productPrice,
+
+                quantity: 1
+
+            });
+
+        }
+
+        updateCartCount();
+
+        alert(
+            productName +
+            " added to your cart! 🛍️"
+        );
+
     });
 
-    if (existingProduct) {
-
-        existingProduct.quantity++;
-
-    } else {
-
-        cart.push({
-            name: productName,
-            price: productPrice,
-            quantity: 1
-        });
-
-    }
-
-    updateCartCount();
-
-    alert(productName + " added to your cart! 🛍️");
-
 });
-```
 
-});
 
 // =========================
 // UPDATE CART COUNT
@@ -89,21 +120,22 @@ button.addEventListener("click", function () {
 
 function updateCartCount() {
 
-```
-const cartCount = document.querySelector(".cart-count");
+    const cartCount =
+        document.querySelector(".cart-count");
 
-let totalItems = 0;
+    let totalItems = 0;
 
-cart.forEach(function (item) {
+    cart.forEach(item => {
 
-    totalItems += item.quantity;
+        totalItems += item.quantity;
 
-});
+    });
 
-cartCount.textContent = totalItems;
-```
+    cartCount.textContent =
+        totalItems;
 
 }
+
 
 // =========================
 // OPEN CART
@@ -111,13 +143,12 @@ cartCount.textContent = totalItems;
 
 cartButton.addEventListener("click", function () {
 
-```
-renderCart();
+    renderCart();
 
-cartModal.classList.add("active");
-```
+    cartModal.classList.add("active");
 
 });
+
 
 // =========================
 // RENDER CART
@@ -125,89 +156,72 @@ cartModal.classList.add("active");
 
 function renderCart() {
 
-```
-cartItems.innerHTML = "";
+    cartItems.innerHTML = "";
 
-let subtotal = 0;
+    let subtotal = 0;
 
-if (cart.length === 0) {
+    if (cart.length === 0) {
 
-    cartItems.innerHTML =
-        "<p>Your cart is empty! 🛍️</p>";
+        cartItems.innerHTML =
+            "<p>Your cart is empty! 🛍️</p>";
 
-    cartTotal.textContent = "";
+        cartTotal.textContent = "";
 
-    return;
+        return;
 
-}
+    }
 
-cart.forEach(function (item, index) {
+    cart.forEach((item, index) => {
 
-    const itemTotal =
-        item.price * item.quantity;
+        const itemTotal =
+            item.price * item.quantity;
 
-    subtotal += itemTotal;
+        subtotal += itemTotal;
 
-    const cartItem =
-        document.createElement("div");
+        cartItems.innerHTML += `
 
-    cartItem.classList.add("cart-item");
+            <div class="cart-item">
 
-    const itemName =
-        document.createElement("strong");
+                <strong>
+                    ${item.name}
+                </strong>
 
-    itemName.textContent =
-        item.name;
+                <p>
+                    ₹${item.price}
+                    ×
+                    ${item.quantity}
+                    =
+                    ₹${itemTotal}
+                </p>
 
-    const itemPrice =
-        document.createElement("p");
+                <button
+                    onclick="removeFromCart(${index})"
+                >
+                    Remove
+                </button>
 
-    itemPrice.textContent =
-        "₹" +
-        item.price +
-        " × " +
-        item.quantity +
-        " = ₹" +
-        itemTotal;
+            </div>
 
-    const removeButton =
-        document.createElement("button");
-
-    removeButton.textContent =
-        "Remove";
-
-    removeButton.addEventListener("click", function () {
-
-        removeFromCart(index);
+        `;
 
     });
 
-    cartItem.appendChild(itemName);
+    const shipping =
+        calculateShipping(subtotal);
 
-    cartItem.appendChild(itemPrice);
+    const finalTotal =
+        subtotal + shipping;
 
-    cartItem.appendChild(removeButton);
-
-    cartItems.appendChild(cartItem);
-
-});
-
-const shipping =
-    getShipping(subtotal);
-
-const finalTotal =
-    subtotal + shipping;
-
-cartTotal.textContent =
-    "Subtotal: ₹" +
-    subtotal +
-    " | Shipping: ₹" +
-    shipping +
-    " | Total: ₹" +
-    finalTotal;
-```
+    cartTotal.textContent =
+        "Subtotal: ₹" +
+        subtotal +
+        " | Shipping: ₹" +
+        shipping +
+        " | Total: ₹" +
+        finalTotal;
 
 }
+
 
 // =========================
 // REMOVE FROM CART
@@ -215,15 +229,14 @@ cartTotal.textContent =
 
 function removeFromCart(index) {
 
-```
-cart.splice(index, 1);
+    cart.splice(index, 1);
 
-updateCartCount();
+    updateCartCount();
 
-renderCart();
-```
+    renderCart();
 
 }
+
 
 // =========================
 // CLOSE CART
@@ -231,106 +244,113 @@ renderCart();
 
 closeCart.addEventListener("click", function () {
 
-```
-cartModal.classList.remove("active");
-```
+    cartModal.classList.remove("active");
 
 });
 
+
 // =========================
-// CART CHECKOUT
+// CART → CHECKOUT
 // =========================
 
 cartCheckoutButton.addEventListener("click", function () {
 
-```
-if (cart.length === 0) {
+    if (cart.length === 0) {
 
-    alert("Your cart is empty! 🛍️");
+        alert(
+            "Your cart is empty! 🛍️"
+        );
 
-    return;
+        return;
 
-}
+    }
 
-let subtotal = 0;
+    let subtotal = 0;
 
-cart.forEach(function (item) {
+    cart.forEach(item => {
 
-    subtotal +=
-        item.price *
-        item.quantity;
-
-});
-
-const shipping =
-    getShipping(subtotal);
-
-const finalTotal =
-    subtotal + shipping;
-
-const productNames =
-    cart.map(function (item) {
-
-        return item.name +
-            " × " +
+        subtotal +=
+            item.price *
             item.quantity;
 
-    }).join(", ");
+    });
 
-selectedProductName =
-    productNames;
+    const shipping =
+        calculateShipping(subtotal);
 
-selectedProductPrice =
-    finalTotal;
+    const finalTotal =
+        subtotal + shipping;
 
-isCartCheckout =
-    true;
+    const productNames =
+        cart.map(item => {
 
-selectedProduct.textContent =
-    productNames +
-    " — Total: ₹" +
-    finalTotal;
+            return (
+                item.name +
+                " × " +
+                item.quantity
+            );
 
-quantityInput.value = 1;
+        }).join(", ");
 
-cartModal.classList.remove("active");
+    selectedProductName =
+        productNames;
 
-orderFormContainer.classList.add("active");
-```
+    selectedProductPrice =
+        subtotal;
+
+    isCartCheckout =
+        true;
+
+    selectedProduct.textContent =
+        productNames +
+        " — Total: ₹" +
+        finalTotal;
+
+    document.querySelector(
+        "#customer-quantity"
+    ).value = 1;
+
+    cartModal.classList.remove("active");
+
+    orderFormContainer.classList.add("active");
 
 });
+
 
 // =========================
 // BUY NOW
 // =========================
 
-buyNowButtons.forEach(function (button) {
+buyNowButtons.forEach(button => {
 
-```
-button.addEventListener("click", function () {
+    button.addEventListener("click", function () {
 
-    selectedProductName =
-        this.dataset.name;
+        selectedProductName =
+            this.dataset.name;
 
-    selectedProductPrice =
-        Number(this.dataset.price);
+        selectedProductPrice =
+            Number(
+                this.dataset.price
+            );
 
-    isCartCheckout =
-        false;
+        isCartCheckout =
+            false;
 
-    selectedProduct.textContent =
-        selectedProductName +
-        " — ₹" +
-        selectedProductPrice;
+        selectedProduct.textContent =
+            selectedProductName +
+            " — ₹" +
+            selectedProductPrice;
 
-    quantityInput.value = 1;
+        document.querySelector(
+            "#customer-quantity"
+        ).value = 1;
 
-    orderFormContainer.classList.add("active");
+        orderFormContainer.classList.add("active");
+
+    });
 
 });
-```
 
-});
 
 // =========================
 // CLOSE ORDER FORM
@@ -338,54 +358,55 @@ button.addEventListener("click", function () {
 
 closeOrderForm.addEventListener("click", function () {
 
-```
-orderFormContainer.classList.remove("active");
-```
+    orderFormContainer.classList.remove("active");
 
 });
 
+
 // =========================
-// SUBMIT ORDER
+// SUBMIT ORDER → PAYMENT
 // =========================
 
 orderForm.addEventListener("submit", function (event) {
 
-```
-event.preventDefault();
+    event.preventDefault();
 
-const quantity =
-    Number(quantityInput.value);
+    const quantity =
+        Number(
+            document.querySelector(
+                "#customer-quantity"
+            ).value
+        );
 
-let subtotal = 0;
+    let subtotal;
 
-if (isCartCheckout) {
+    if (isCartCheckout) {
 
-    subtotal =
-        selectedProductPrice;
+        subtotal =
+            selectedProductPrice;
 
-} else {
+    } else {
 
-    subtotal =
-        selectedProductPrice *
-        quantity;
+        subtotal =
+            selectedProductPrice *
+            quantity;
 
-}
+    }
 
-const shipping =
-    getShipping(subtotal);
+    const shipping =
+        calculateShipping(subtotal);
 
-const finalTotal =
-    subtotal + shipping;
+    const finalTotal =
+        subtotal + shipping;
 
-paymentAmount.textContent =
-    "Subtotal: ₹" +
-    subtotal +
-    " | Shipping: ₹" +
-    shipping +
-    " | Please pay ₹" +
-    finalTotal;
+    paymentAmount.textContent =
+        "Subtotal: ₹" +
+        subtotal +
+        " | Shipping: ₹" +
+        shipping +
+        " | Please pay ₹" +
+        finalTotal;
 
-paymentSection.classList.add("active");
-```
+    paymentSection.classList.add("active");
 
 });
